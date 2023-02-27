@@ -1,0 +1,9 @@
+/vendor
+
+/composer.lock
+
+/.idea/*
+!/.idea/codeStyles/
+!/.idea/dictionaries/
+!/.idea/encodings.xml
+!/.idea/inspectionProfiles/
