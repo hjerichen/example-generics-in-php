@@ -5,18 +5,10 @@ namespace HJerichen\ExampleGenericsInPhp\Services;
 
 use HJerichen\ExampleGenericsInPhp\Entities\CustomerEntity;
 
-class CustomersBuilder
+/** @template-extends EntityBuilder<CustomerEntity, array{id: int, name: string}> */
+class CustomersBuilder extends EntityBuilder
 {
-    public function build(array $hashes): array
-    {
-        $customers = [];
-        foreach ($hashes as $hash) {
-            $customers[] = $this->buildForHash($hash);
-        }
-        return $customers;
-    }
-
-    private function buildForHash(array $hash): CustomerEntity
+    protected function buildForHash($hash): CustomerEntity
     {
         return new CustomerEntity(
             id: $hash['id'],

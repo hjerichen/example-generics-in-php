@@ -4,18 +4,10 @@ namespace HJerichen\ExampleGenericsInPhp\Services;
 
 use HJerichen\ExampleGenericsInPhp\Entities\ProductEntity;
 
-class ProductsBuilder
+/** @template-extends EntityBuilder<ProductEntity, array{id: int, vendorProductId: string}> */
+class ProductsBuilder extends EntityBuilder
 {
-    public function build(array $hashes): array
-    {
-        $products = [];
-        foreach ($hashes as $hash) {
-            $products[] = $this->buildForHash($hash);
-        }
-        return $products;
-    }
-
-    private function buildForHash(array $hash): ProductEntity
+    protected function buildForHash($hash): ProductEntity
     {
         return new ProductEntity(
             id: $hash['id'],
