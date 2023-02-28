@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace HJerichen\ExampleGenericsInPhp\Services;
 
+use HJerichen\ExampleGenericsInPhp\Collection\EntityCollection;
 use HJerichen\ExampleGenericsInPhp\Entities\Entity;
 use ReflectionClass;
 
@@ -14,15 +15,15 @@ class EntityBuilder
      * @template T of Entity
      * @param class-string<T> $class
      * @param array[] $hashes
-     * @return T[]
+     * @return EntityCollection<T>
      */
-    public function build(string $class, array $hashes): array
+    public function build(string $class, array $hashes): EntityCollection
     {
         $entities = [];
         foreach ($hashes as $hash) {
             $entities[] = $this->buildForHash($class, $hash);
         }
-        return $entities;
+        return new EntityCollection($entities);
     }
 
     /**
